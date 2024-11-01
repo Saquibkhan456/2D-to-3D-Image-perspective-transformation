@@ -1,2 +1,4 @@
 __pycache__
 flagged
+*.mp4
+image_frames/*jpg

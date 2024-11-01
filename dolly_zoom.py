@@ -32,11 +32,11 @@ fov_start = 50
 fov_end = 68
 
 t_start = 0 
-t_end = 0.13
+t_end = 0.15
 
 with torch.no_grad():
     fov_h_target = np.arange(fov_start, fov_end, (fov_end-fov_start)/num_frames) 
-    t_z = np.arange(t_start, t_end, (t_end-t_start)/60)
+    t_z = np.arange(t_start, t_end, (t_end-t_start)/num_frames)
     for i in range(60):
         K_target = create_intrinsic_matrix(height, width, fov_h_target[i], fov_h_target[i]*aspect, device= 'cuda')
         t = torch.from_numpy(np.array([0.0, 0.0, -t_z[i]])+1e-6).cuda()

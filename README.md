@@ -1,11 +1,9 @@
-Here's the updated README to reflect the changes to a Tkinter-based GUI interface:
-
----
-
 # Depth-Based Image Perspective Transformation App
 
 This Python application applies transformations to an image in a 3D space using depth estimation. The GUI uses Tkinter, allowing users to adjust camera properties such as field of view, rotation angles, and translation to see real-time perspective changes directly in the app window.
 
+
+![Transformation Demo](assets/transformation_demo.gif)
 ## Features
 
 - **Depth Estimation**: Automatically estimates the depth map of an image using DepthAnything.

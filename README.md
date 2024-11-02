@@ -1,12 +1,16 @@
+Here's the updated README to reflect the changes to a Tkinter-based GUI interface:
+
+---
+
 # Depth-Based Image Perspective Transformation App
 
-This Python application uses depth estimation to apply transformations to an image in a 3D space. It employs Gradio to provide an interactive web interface where users can adjust camera properties such as field of view and rotation angles to see real-time changes in the image perspective.
+This Python application applies transformations to an image in a 3D space using depth estimation. The GUI uses Tkinter, allowing users to adjust camera properties such as field of view, rotation angles, and translation to see real-time perspective changes directly in the app window.
 
 ## Features
 
-- **Depth Estimation**: Automatically estimate the depth map of an image using DepthAnything.
+- **Depth Estimation**: Automatically estimates the depth map of an image using DepthAnything.
 - **3D Transformation**: Adjust field of view, rotation, and translation parameters to warp the image based on depth.
-- **Interactive Interface**: Control parameters with Gradio sliders and see real-time transformation results.
+- **Interactive Interface**: Control parameters with Tkinter sliders for immediate, real-time transformation results.
 
 ## Requirements
 
@@ -20,7 +24,7 @@ To install the required packages, create a new Conda environment and install dep
 ```bash
 conda create -n depth_transform python=3.9
 conda activate depth_transform
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Usage
@@ -29,23 +33,25 @@ pip install requirements.txt
 
 Run the application from the terminal, specifying the path to an input image and optionally a depth map. If no depth map is provided, the app will generate one using the `estimate_depth` module.
 
-#### If depthmap is already available
+#### If depth map is already available
 ```bash
 python app.py "/path/to/image.jpg" "path/to/depthmap.npy"
 ```
 
-#### If depthmap is not available and needs to be estimated
+#### If depth map is not available and needs to be estimated
 ```bash
 python app.py "/path/to/image.jpg" ""
 ```
 
 ### 2. Interface Controls
 
-The Gradio interface provides sliders to control the following parameters:
+The Tkinter GUI provides sliders to control the following parameters:
 
 - **Field of View (FOV)**: Changes the camera’s field of view, allowing you to zoom in or out.
-- **Rx, Ry, Rz**: Rotate the image along the x, y, and z axes to adjust the viewing angle.
-- **Tx, Ty, Tz**: Translate the image along the x, y, and z axes for fine positioning.
+- **Rotation X, Y, Z**: Rotate the image along the x, y, and z axes to adjust the viewing angle.
+- **Translation X, Y, Z**: Translate the image along the x, y, and z axes for fine positioning.
+
+The image updates automatically as you adjust each slider, keeping the original aspect ratio for a clear, undistorted view.
 
 ### Example
 
@@ -53,14 +59,5 @@ The Gradio interface provides sliders to control the following parameters:
 python app.py images/shocked.jpg
 ```
 
-Adjust the sliders in the web interface to explore different views of the transformed image.
+Adjust the sliders in the Tkinter interface to explore different perspectives of the transformed image.
 
-## Files Overview
-
-- `app.py`: Main application script.
-- `utils.py`: Utility functions for image processing and transformations.
-- `estimate_depth.py`: Provides depth estimation functionality.
-
-## Acknowledgments
-
-This project uses PyTorch for depth map handling and image transformations. The interactive GUI is powered by Gradio, making it easy to visualize transformations directly from a web interface.

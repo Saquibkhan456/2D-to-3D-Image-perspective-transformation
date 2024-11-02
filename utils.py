@@ -68,7 +68,7 @@ def warp(image, mapping):
     return output.permute(0,2,3,1)*255
 
 
-def max_filter(image_tensor, kernel_size=3):
+def max_filter(image_tensor, kernel_size=2):
     image_tensor = image_tensor.permute(2,0,1)
     padding = kernel_size // 2
     return nn.functional.max_pool2d(image_tensor.unsqueeze(0), kernel_size=kernel_size, stride=1, padding=padding).squeeze(0).permute(1,2,0)

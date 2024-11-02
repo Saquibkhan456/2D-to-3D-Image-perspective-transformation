@@ -29,10 +29,10 @@ R = torch.from_numpy(R).to(torch.float16).cuda()
 
 num_frames = 60
 fov_start = 50
-fov_end = 68
+fov_end = 70
 
 t_start = 0 
-t_end = 0.15
+t_end = 0.3
 
 with torch.no_grad():
     fov_h_target = np.arange(fov_start, fov_end, (fov_end-fov_start)/num_frames) 

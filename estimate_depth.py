@@ -8,7 +8,7 @@ def estimate_depth(image, model_choice = "depth-anything/Depth-Anything-V2-Small
     pipe = pipeline(task="depth-estimation", model=model_choice, device='cuda')
     depth = np.array(pipe(image)["depth"])
     depth = depth / depth.max()
-    depth = (((1 - depth) * 1.0) + 0.1)
+    depth = (((1 - depth) * 1.0) + 0.3)
     return depth
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ The image updates automatically as you adjust each slider, keeping the original 
 ### Example
 
 ```bash
-python app.py images/shocked.jpg
+python app.py "images/shocked.jpg" ""
 ```
 
 Adjust the sliders in the Tkinter interface to explore different perspectives of the transformed image.

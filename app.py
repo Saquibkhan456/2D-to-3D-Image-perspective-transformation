@@ -83,12 +83,12 @@ class ImageUpdaterApp:
         # Slider configuration
         slider_configs = [
             {"label": "FoV", "from_": 0, "to": 100, "default": 50},
-            {"label": "Rotation X", "from_": -50, "to": 50, "default": 0},
-            {"label": "Rotation Y", "from_": -50, "to": 50, "default": 0},
-            {"label": "Rotation Z", "from_": -50, "to": 50, "default": 0},
             {"label": "Translation X", "from_": -0.5, "to": 0.5, "resolution": 0.001, "default": 0},
             {"label": "Translation Y", "from_": -0.5, "to": 0.5, "resolution": 0.001, "default": 0},
-            {"label": "Translation Z", "from_": -0.5, "to": 0.5, "resolution": 0.001, "default": 0}
+            {"label": "Translation Z", "from_": -0.5, "to": 0.5, "resolution": 0.001, "default": 0},
+            {"label": "Rotation X", "from_": -50, "to": 50, "default": 0},
+            {"label": "Rotation Y", "from_": -50, "to": 50, "default": 0},
+            {"label": "Rotation Z", "from_": -50, "to": 50, "default": 0}
         ]
 
         # Create sliders in the right frame
@@ -123,7 +123,7 @@ class ImageUpdaterApp:
         original_image = Image.fromarray(array.astype('uint8'))
 
         # Resize the image to fit within a max dimension, keeping aspect ratio
-        max_width, max_height = 500, 500
+        max_width, max_height = 1280, 720
         original_image.thumbnail((max_width, max_height), Image.LANCZOS)
         
         self.tk_image = ImageTk.PhotoImage(original_image)

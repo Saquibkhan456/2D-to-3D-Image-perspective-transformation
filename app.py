@@ -34,7 +34,7 @@ fov_h_source = 50.0
 K_source = create_intrinsic_matrix(height, width, fov_h_source, fov_h_source * aspect, device='cuda')
 
 # Define the transformation function
-def run_transformation(fov_h_target, rx, ry, rz, tx, ty, tz):
+def run_transformation(fov_h_target, tx, ty, tz, rx, ry, rz):
     t = torch.from_numpy(np.array([tx, ty, tz]) + 1e-6).cuda()
     R, _ = cv2.Rodrigues(np.deg2rad(np.array([rx, ry, rz])))
     R = torch.from_numpy(R).to(torch.float16).cuda()

@@ -73,28 +73,22 @@ def max_filter(image_tensor, kernel_size=2):
     image_tensor = image_tensor.permute(2,0,1)
     padding = kernel_size // 2
     return nn.functional.max_pool2d(image_tensor.unsqueeze(0), kernel_size=kernel_size, stride=1, padding=padding).squeeze(0).permute(1,2,0)
+
 def remove_stray_pixels_morphology(image, n=1):
-    # Assume image shape is (H, W, 2)
-    image = image.permute(2, 0, 1)  # Convert to (2, H, W) for easier channel-wise processing
+    image = image.permute(2, 0, 1)  
     processed_channels = []
     
-    # Kernel for morphological operations
     kernel = torch.ones((1, 1, n, n), dtype=torch.float32, device=image.device)
-    
     for channel in range(2):
-        # Binary threshold: non-zero regions as 1.0, others as 0.0
+        
         binary_channel = (image[channel] != 0).float()
         
-        # Perform erosion and then dilation
-        # Erosion reduces small components, dilation restores large components
         eroded = F.conv2d(binary_channel.unsqueeze(0).unsqueeze(0), kernel, padding=n//2) == (n * n)
         dilated = F.conv2d(eroded.float(), kernel, padding=n//2) > 0
-        
-        # Use the final mask to keep only the large regions in the original image
+     
         processed_channel = image[channel] * dilated.squeeze().float()
         processed_channels.append(processed_channel)
     
-    # Stack processed channels and permute back to (H, W, 2)
     return torch.stack(processed_channels).permute(1, 2, 0)
 
 def transform_image(image, depth,  K_source, K_target, R, t):

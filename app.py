@@ -12,8 +12,8 @@ import argparse
 
 # Set up argparse to take the image path from the terminal
 parser = argparse.ArgumentParser(description="Run image transformation with depth estimation")
-parser.add_argument("image_path", type=str, help="Path to the input image file.")
-parser.add_argument("depth", type=str, help="Path to the depthmap.")
+parser.add_argument("--image_path", type=str, help="Path to the input image file.", default="images/men.jpg")
+parser.add_argument("--depth", type=str, help="Path to the depthmap.", default="")
 args = parser.parse_args()
 
 image = Image.open(args.image_path)
@@ -42,6 +42,8 @@ def run_transformation(fov_h_target, tx, ty, tz, rx, ry, rz):
     mapping = depthmap_to_transformation_mapping(depth, K_source, K_target, R, t)
     inverted_mapping = invert_mapping(mapping, depth)
     inverted_mapping = max_filter(inverted_mapping)
+    inverted_mapping = remove_stray_pixels_morphology(image=inverted_mapping, n=3)
+
     return warp(image_t, inverted_mapping).to(torch.uint8)[0].cpu().numpy()
 
 class ImageUpdaterApp:
